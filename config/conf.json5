@@ -1,0 +1,39 @@
+{
+  app: {
+    logging: 'debug'
+    //'info' | 'debug' | 'warning' | 'error'
+  },
+  api: {
+    version: 'v1',
+    endpoint: 'api',
+    http: {
+      ip: '0.0.0.0',
+      port: 5001
+    }
+  },
+  db: {
+    mongo: {
+      logging: "info",
+      url: "mongodb://127.0.0.3:27027,127.0.0.3:27037/?replicaSet=rs0",
+      albumStore: {
+        dbName: 'album_store',
+        scemas: {
+          user: 'user',
+          photo: 'photo',
+          album: 'album',
+        },
+      },
+      options: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    },
+  },
+  static: {
+    path: 'public',
+    url: 'http://127.0.0.1:5001/qr',
+    extensions: [
+      "png"
+    ]
+  }
+}
