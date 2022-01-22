@@ -1,26 +1,23 @@
-import {Doc} from "./Interface";
-import {IndexSpecification, ObjectId} from "mongodb";
+import {Doc}                                              from "./Interface";
+import { IndexDescription, IndexSpecification, ObjectId } from "mongodb";
 
 export class ClientDataSet {
     public fieldSets(): Array<keyof Doc> {
-        return ["_id", "apiKey", "apiSecret", "status", "type"];
+        return ["_id", "title", "owner"];
     }
 
-    public indexes(): IndexSpecification[] {
+    public indexes(): IndexDescription[] {
         return [
-            // {key: {apiKey: 1}, unique: true},
-            // {key: {apiSecret: 1}, unique: true},
-            // {key: {status: 1}}, {key: {type: 1}}
+            {key: {title: 1}},
+            {key: {owner: 1}},
         ];
     }
 
     public defaults(): Doc {
         return {
             _id: new ObjectId().toHexString(),
-            apiKey: undefined,
-            apiSecret: undefined,
-            status: undefined,
-            type: "unknown"
+            title: undefined,
+            owner: undefined,
         };
     }
 

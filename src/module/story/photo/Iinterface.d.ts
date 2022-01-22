@@ -7,6 +7,8 @@ export namespace Photo {
 	export namespace Response {
 		export interface LoadPhoto {
 			count: number;
+			albums: any;
+			photos: any;
 		}
 	}
 }

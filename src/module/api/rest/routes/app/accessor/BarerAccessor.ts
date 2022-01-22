@@ -52,7 +52,7 @@ export class BarerAccessor {
     protected async before(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction): Promise<any> {
         try {
             const authorization = req.header('authorization');
-            req.context = await this.stories.Auth.bearer({authorization});
+            req.context = {body: await this.stories.Auth.bearer({authorization: authorization.split(" ")[1]})};
             await next();
         } catch (e) {
             await next(e);

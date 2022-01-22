@@ -9,7 +9,7 @@ import { BarerAccessor }                                 from "./accessor/BarerA
 /**
  * @name AppPresenter
  */
-@Presenter({path: "/auth"})
+@Presenter({path: "/"})
 export default class AppPresenter {
 
     /**

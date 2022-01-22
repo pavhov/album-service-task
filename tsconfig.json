@@ -9,6 +9,7 @@
       "node",
       "jest"
     ],
+    "moduleResolution": "Node",
     "sourceRoot": "./src",
     "outDir": "./out",
     "resolveJsonModule": true,

@@ -1,10 +1,4 @@
-import {
-    BulkWriteOptions,
-    Collection,
-    Db, DeleteOptions, Filter, FindOptions, InsertOneOptions,
-    MongoClient,
-    OptionalId, OptionalUnlessRequiredId, UpdateFilter, UpdateOptions
-} from "mongodb";
+import {BulkWriteOptions, Collection, Db, DeleteOptions, Filter, FindOptions, InsertOneOptions, MongoClient, OptionalUnlessRequiredId, UpdateFilter, UpdateOptions} from "mongodb";
 
 import {DBModule} from "../../../lib/decorators/DBModul";
 import DBStory from "./../../../lib/abstract/DBStory";
@@ -138,7 +132,7 @@ export default class AlbumTask extends DBStory {
    * @protected
    */
   public async indexing() {
-      // await this._dataSours.createIndexes(this._dataSet.indexes());
+      await this._dataSours.createIndexes(this._dataSet.indexes());
   }
 
   /**
@@ -146,15 +140,25 @@ export default class AlbumTask extends DBStory {
    * @protected
    */
   public async rules(db: Db) {
-      // await db.command({
-      //     collMod: Params.db.mongo.albumStore.schemas.client,
-      //     validator: {
-      //         $jsonSchema: {
-      //             bsonType: "object",
-      //             required: ["apiKey", "apiSecret", "status", "type"]
-      //         }
-      //     },
-      //     validationLevel: "moderate"
-      // });
+      await db.command({
+          collMod: Params.db.mongo.albumStore.schemas.album,
+          validator: {
+              $jsonSchema: {
+                  bsonType: "object",
+                  properties: {
+                      title: {
+                          bsonType: "string",
+                          description: "must be a string and is required",
+                      },
+                      owner: {
+                          bsonType: "string",
+                          description: "must be a string and is required",
+                      }
+                  },
+                  required: ["title", "owner"]
+              }
+          },
+          validationLevel: "moderate"
+      });
   }
 }

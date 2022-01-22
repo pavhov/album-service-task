@@ -151,6 +151,28 @@ export default class PhotoTask extends DBStory {
           validator: {
               $jsonSchema: {
                   bsonType: "object",
+                  properties: {
+                      owner: {
+                          bsonType: "string",
+                          description: "must be a string and is required",
+                      },
+                      albumId: {
+                          bsonType: "string",
+                          description: "must be a string and is required",
+                      },
+                      title: {
+                          bsonType: "string",
+                          description: "must be a string and is required",
+                      },
+                      url: {
+                          bsonType: "string",
+                          description: "must be a string and is required",
+                      },
+                      thumbnailUrl: {
+                          bsonType: "string",
+                          description: "must be a string and is required",
+                      }
+                  },
                   required: ["owner", "albumId", "title", "url", "thumbnailUrl"]
               }
           },
