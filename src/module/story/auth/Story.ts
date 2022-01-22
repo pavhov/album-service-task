@@ -69,6 +69,22 @@ export class AuthStory {
 	}
 
 	/**
+	 * @name bearer
+	 *
+	 * @param data
+	 */
+	public async bearer(data: Auth.Request.Barer): Promise<Auth.Response.Barer> {
+		const res = JWT.verify(data.authorization, Params.jwt.secret);
+		const user = await this.tasks.User.getOne({_id: res.user});
+		if (!user) {
+			throw new Error("Wrong token");
+		}
+		return {owner: user._id}
+
+
+	}
+
+	/**
 	 * @name token
 	 *
 	 * @param res

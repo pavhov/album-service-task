@@ -15,7 +15,8 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "skipLibCheck": true
   },
   "files": [
     "src/Main.ts"

@@ -12,6 +12,10 @@ export namespace Auth {
 			password: string;
 			registerDate: string;
 		}
+
+		export interface Barer {
+			authorization: string;
+		}
 	}
 	export namespace Response {
 		export interface Login {
@@ -22,6 +26,10 @@ export namespace Auth {
 		export interface Register {
 			type: string;
 			token: string;
+		}
+
+		export interface Barer {
+			owner: string;
 		}
 	}
 }

@@ -3,9 +3,11 @@ import Express                                           from "express";
 import { LoginAccessor }                                 from "./accessor/LoginAccessor";
 import { AuthStory }                                     from "../../../../story/auth/Story";
 import { RegisterAccessor }                              from "./accessor/RegisterAccessor";
+import { PhotoStory }                                    from "../../../../story/photo/Story";
+import { BarerAccessor }                                 from "./accessor/BarerAccessor";
 
 /**
- * @name AuthPresenter
+ * @name AppPresenter
  */
 @Presenter({path: "/auth"})
 export default class AppPresenter {
@@ -16,14 +18,16 @@ export default class AppPresenter {
      */
     private stories: {
         Auth: AuthStory,
+        Photo: PhotoStory,
     };
 
     /**
-     * @name AuthPresenter
+     * @name AppPresenter
      */
     constructor() {
         this.stories = {
             Auth: new AuthStory,
+            Photo: new PhotoStory,
         };
     }
 
@@ -41,7 +45,6 @@ export default class AppPresenter {
         } catch (err) {
             next(err);
         }
-
     }
 
     /**
@@ -58,7 +61,6 @@ export default class AppPresenter {
         } catch (err) {
             next(err);
         }
-
     }
 
     /**
@@ -67,14 +69,14 @@ export default class AppPresenter {
      * @param res
      * @param next
      */
+    @Use(BarerAccessor)
     @Patch()
-    async "/load-photos"(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+    async "/load-photos"(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction) {
         try {
-            res.json({});
+            res.json(await this.stories.Photo.load(req.context.body));
         } catch (err) {
             next(err);
         }
-
     }
 
     /**
