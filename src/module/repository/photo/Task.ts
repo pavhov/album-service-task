@@ -128,7 +128,7 @@ export default class PhotoTask extends DBStory {
    */
   public async init(dataSours: MongoClient) {
       const db: Db = dataSours.db(Params.db.mongo.albumStore.dbName);
-      this._dataSours = db.collection(Params.db.mongo.albumStore.scemas.photo);
+      this._dataSours = db.collection(Params.db.mongo.albumStore.schemas.photo);
       await this.indexing();
       await this.rules(db);
   }
@@ -138,7 +138,7 @@ export default class PhotoTask extends DBStory {
    * @protected
    */
   public async indexing() {
-      // await this._dataSours.createIndexes(this._dataSet.indexes());
+      await this._dataSours.createIndexes(this._dataSet.indexes());
   }
 
   /**
@@ -146,15 +146,15 @@ export default class PhotoTask extends DBStory {
    * @protected
    */
   public async rules(db: Db) {
-      // await db.command({
-      //     collMod: Params.db.mongo.albumStore.scemas.client,
-      //     validator: {
-      //         $jsonSchema: {
-      //             bsonType: "object",
-      //             required: ["apiKey", "apiSecret", "status", "type"]
-      //         }
-      //     },
-      //     validationLevel: "moderate"
-      // });
+      await db.command({
+          collMod: Params.db.mongo.albumStore.schemas.photo,
+          validator: {
+              $jsonSchema: {
+                  bsonType: "object",
+                  required: ["owner", "albumId", "title", "url", "thumbnailUrl"]
+              }
+          },
+          validationLevel: "moderate"
+      });
   }
 }

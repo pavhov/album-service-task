@@ -1,5 +1,5 @@
 export interface Doc {
-  _id: string;
+  _id?: string;
   login: string;
   email: string;
   password: string;

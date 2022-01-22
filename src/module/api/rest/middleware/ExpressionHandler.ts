@@ -11,7 +11,7 @@ export const Error404Handler = async (req: Request, res: Response, next: NextFun
 
 export const ExpressionHandler = async (err: Error | any, req: Request, res: Response, next: NextFunction) => {
 	const status = parseInt(err.code || err.status) || 400;
-	const httpErr = new HttpError(`${err.name} ${err.message}`, status);
+	const httpErr = new HttpError(`${err.name} ${err.message}`, status, err.errors);
 	res.status(status).json(httpErr);
 	error(httpErr);
 };

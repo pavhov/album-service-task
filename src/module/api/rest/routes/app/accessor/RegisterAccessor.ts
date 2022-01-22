@@ -4,7 +4,7 @@ import ajv             from "../../../../../../lib/utils/ajv/lib";
 /**
  * @name LoginAccessor
  */
-export class LoginAccessor {
+export class RegisterAccessor {
 
     /**
      * @name _options
@@ -16,7 +16,7 @@ export class LoginAccessor {
      * @name _instance
      * @private
      */
-    private static _instance: LoginAccessor;
+    private static _instance: RegisterAccessor;
 
     /**
      * @name _requestSchema
@@ -34,30 +34,29 @@ export class LoginAccessor {
                 },
                 email: {
                     type: "string",
-                    format: "email",
                 },
                 password: {
                     type: "string",
                 },
             },
-            required: ["password"],
-            oneOf : [
-                {required: ["login"]},
-                {required: ["email"]},
+            required: [
+                "login",
+                "email",
+                "password",
             ],
             additionalProperties: false
-        }, 'loginRequestSchema');
+        }, 'registerRequestSchema');
     }
     /**
      * @name Instance
      * @constructor
      */
-    static Instance(): LoginAccessor {
-        if (!LoginAccessor._instance) {
-            LoginAccessor._instance = new LoginAccessor();
+    static Instance(): RegisterAccessor {
+        if (!RegisterAccessor._instance) {
+            RegisterAccessor._instance = new RegisterAccessor();
         }
 
-        return LoginAccessor._instance;
+        return RegisterAccessor._instance;
     }
 
     /**
@@ -68,7 +67,7 @@ export class LoginAccessor {
      * @protected
      */
     protected async before(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction): Promise<any> {
-        const validate = ajv.getSchema('loginRequestSchema');
+        const validate = ajv.getSchema('registerRequestSchema');
         try {
             const body = await validate(req.body);
             req.context = {body};

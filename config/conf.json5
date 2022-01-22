@@ -13,11 +13,11 @@
   },
   db: {
     mongo: {
-      logging: "info",
+      logging: "debug",
       url: "mongodb://127.0.0.3:27027,127.0.0.3:27037/?replicaSet=rs0",
       albumStore: {
         dbName: 'album_store',
-        scemas: {
+        schemas: {
           user: 'user',
           photo: 'photo',
           album: 'album',
@@ -35,5 +35,10 @@
     extensions: [
       "png"
     ]
+  },
+  jwt: {
+    secret: '-$$\qw-#18V2wTUjnpU#D`Lf)}/3oX5^=1sCVMJhf[G;od("sr#-}LBKTD4sf>cz',
+    options: {
+    }
   }
 }

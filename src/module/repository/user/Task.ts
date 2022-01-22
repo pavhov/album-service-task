@@ -129,7 +129,7 @@ export default class UserTask extends DBStory {
      */
     public async init(dataSours: MongoClient) {
         const db: Db = dataSours.db(Params.db.mongo.albumStore.dbName);
-        this._dataSours = db.collection(Params.db.mongo.albumStore.scemas.user);
+        this._dataSours = db.collection(Params.db.mongo.albumStore.schemas.user);
         await this.indexing();
         await this.rules(db);
     }
@@ -148,7 +148,7 @@ export default class UserTask extends DBStory {
      */
     public async rules(db: Db) {
         await db.command({
-            collMod: Params.db.mongo.albumStore.scemas.user,
+            collMod: Params.db.mongo.albumStore.schemas.user,
             validator: {
                 $jsonSchema: {
                     bsonType: "object",
@@ -166,7 +166,7 @@ export default class UserTask extends DBStory {
                             description: "must be a string and is required",
                         },
                         registerDate: {
-                            bsonType: "number",
+                            bsonType: "string",
                             description: "must be a timestamp and is required",
                         },
                     },

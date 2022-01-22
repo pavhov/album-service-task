@@ -128,7 +128,7 @@ export default class AlbumTask extends DBStory {
    */
   public async init(dataSours: MongoClient) {
       const db: Db = dataSours.db(Params.db.mongo.albumStore.dbName);
-      this._dataSours = db.collection(Params.db.mongo.albumStore.scemas.album);
+      this._dataSours = db.collection(Params.db.mongo.albumStore.schemas.album);
       await this.indexing();
       await this.rules(db);
   }
@@ -147,7 +147,7 @@ export default class AlbumTask extends DBStory {
    */
   public async rules(db: Db) {
       // await db.command({
-      //     collMod: Params.db.mongo.albumStore.scemas.client,
+      //     collMod: Params.db.mongo.albumStore.schemas.client,
       //     validator: {
       //         $jsonSchema: {
       //             bsonType: "object",

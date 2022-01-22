@@ -1,6 +1,8 @@
 import { Delete, Get, Patch, Post, Presenter, Put, Use } from "../../../../../lib/decorators/Express";
-import Express from "express";
-import { LoginAccessor } from "./accessor/LoginAccessor";
+import Express                                           from "express";
+import { LoginAccessor }                                 from "./accessor/LoginAccessor";
+import { AuthStory }                                     from "../../../../story/auth/Story";
+import { RegisterAccessor }                              from "./accessor/RegisterAccessor";
 
 /**
  * @name AuthPresenter
@@ -13,6 +15,7 @@ export default class AppPresenter {
      * @private
      */
     private stories: {
+        Auth: AuthStory,
     };
 
     /**
@@ -20,6 +23,7 @@ export default class AppPresenter {
      */
     constructor() {
         this.stories = {
+            Auth: new AuthStory,
         };
     }
 
@@ -30,11 +34,10 @@ export default class AppPresenter {
      * @param next
      */
     @Use(LoginAccessor)
-    @Use(LoginAccessor)
     @Post()
-    async "/login"(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+    async "/login"(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction) {
         try {
-            res.json({});
+            res.json(await this.stories.Auth.login(req.context.body));
         } catch (err) {
             next(err);
         }
@@ -47,10 +50,11 @@ export default class AppPresenter {
      * @param res
      * @param next
      */
+    @Use(RegisterAccessor)
     @Post()
-    async "/register"(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+    async "/register"(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction) {
         try {
-            res.json({});
+            res.json(await this.stories.Auth.register(req.context.body));
         } catch (err) {
             next(err);
         }

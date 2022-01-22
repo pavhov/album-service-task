@@ -80,9 +80,19 @@ export const error = Log("error");
 export const warning = Log("warning");
 
 /**
+ * @name warn
+ */
+export const warn = Log("warning");
+
+/**
  * @name debug
  */
 export const debug = Log("debug");
+
+/**
+ * @name log
+ */
+export const log = Log("debug");
 
 /**
  * @name info
