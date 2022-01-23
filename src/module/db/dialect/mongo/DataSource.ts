@@ -78,7 +78,6 @@ export default class MongoDataSource extends CModule {
    * @protected
    */
     protected async destroy(): Promise<void> {
-        console.log("gago");
         await this._connector.close();
         return Promise.resolve(undefined);
     }

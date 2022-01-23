@@ -1,4 +1,4 @@
-import { Doc } from "../../repository/photo/Interface";
+import {Doc} from "../../repository/photo/Interface";
 
 export namespace Photo {
 	export namespace Request {
@@ -33,6 +33,6 @@ export namespace Photo {
 			albums: any;
 			photos: any;
 		}
-		export interface Photo extends Doc {}
+		export type Photo = Doc
 	}
 }

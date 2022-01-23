@@ -2,6 +2,7 @@
  * @name DBStory
  */
 export default abstract class DBStory {
+
     /**
      * @name init
      */

@@ -1,7 +1,8 @@
-import {Doc}                                              from "./Interface";
-import { IndexDescription, ObjectId } from "mongodb";
+import {Doc} from "./Interface";
+import {IndexDescription, ObjectId} from "mongodb";
 
 export class ClientDataSet {
+
     /**
      * @name fieldSets
      */
@@ -15,7 +16,7 @@ export class ClientDataSet {
     public indexes(): IndexDescription[] {
         return [
             {key: {login: 1}, unique: true},
-            {key: {email: 1}, unique: true},
+            {key: {email: 1}, unique: true}
         ];
     }
 
@@ -28,7 +29,7 @@ export class ClientDataSet {
             login: undefined,
             email: undefined,
             password: undefined,
-            registerDate: undefined,
+            registerDate: undefined
         };
     }
 

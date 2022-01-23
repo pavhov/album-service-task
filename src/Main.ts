@@ -1,6 +1,6 @@
 import ApplicationRunner from "./lib/abstract/ApplicationRunner";
 import {modules} from "./lib/abstract/CModule";
-import Application  from "./lib/decorators/Application";
+import Application from "./lib/decorators/Application";
 import {ModuleImpl} from "./lib/decorators/Module";
 import "./lib/utils/global";
 import {error} from "./lib/utils/logger/lib";

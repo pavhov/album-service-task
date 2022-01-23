@@ -1,4 +1,4 @@
-import Ajv, { Logger } from "ajv";
+import Ajv from "ajv";
 import addFormats from "ajv-formats"
 import * as logger from "../logger/lib";
 
@@ -9,7 +9,7 @@ const ajv = new Ajv({
     coerceTypes: true,
     removeAdditional: true,
     strict: false,
-    logger,
+    logger
 });
 
 addFormats(ajv)

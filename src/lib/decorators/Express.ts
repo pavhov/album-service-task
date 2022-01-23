@@ -1,8 +1,8 @@
-import Express from 'express';
-import listEndpoints from 'express-list-endpoints';
+import Express from "express";
+import listEndpoints from "express-list-endpoints";
 
-import { Error404Handler, ExpressionHandler } from "../../module/api/rest/middleware/ExpressionHandler";
-import {MiddlewareCases}                      from "../interfaces/Express";
+import {Error404Handler, ExpressionHandler} from "../../module/api/rest/middleware/ExpressionHandler";
+import {MiddlewareCases} from "../interfaces/Express";
 import {debug, error} from "../utils/logger/lib";
 
 import Params from "./../../lib/utils/config/Params";
@@ -155,7 +155,7 @@ function BuildPresenter(instance, constructor, routes, name) {
         route.path,
         ...(route.before?.length && route.before || []),
         (...args: any[]) => Handler(middlewareList, ...args),
-        ...(route.after?.length && route.after || []),
+        ...(route.after?.length && route.after || [])
     ].filter((value) => value));
 }
 

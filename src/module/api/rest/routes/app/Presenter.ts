@@ -1,14 +1,14 @@
-import { Delete, Get, Patch, Post, Presenter, Put, Use } from "../../../../../lib/decorators/Express";
-import Express                                           from "express";
-import { LoginAccessor }                                 from "./middleware/LoginAccessor";
-import { AuthStory }                                     from "../../../../story/auth/Story";
-import { RegisterAccessor }                              from "./middleware/RegisterAccessor";
-import { PhotoStory }                                    from "../../../../story/photo/Story";
-import { BarerAccessor }                                 from "./middleware/BarerAccessor";
-import { PaginationMiddleware }                          from "./middleware/PaginationMiddleware";
-import { PhotoDeleteMiddleware }                         from "./middleware/PhotoDeleteMiddleware";
-import { AlbumDeleteMiddleware }                         from "./middleware/AlbumDeleteMiddleware";
-import { AlbumUpdateMiddleware }                         from "./middleware/AlbumUpdateMiddleware";
+import {Delete, Get, Patch, Post, Presenter, Put, Use} from "../../../../../lib/decorators/Express";
+import Express from "express";
+import {LoginAccessor} from "./middleware/LoginAccessor";
+import {AuthStory} from "../../../../story/auth/Story";
+import {RegisterAccessor} from "./middleware/RegisterAccessor";
+import {PhotoStory} from "../../../../story/photo/Story";
+import {BarerAccessor} from "./middleware/BarerAccessor";
+import {PaginationMiddleware} from "./middleware/PaginationMiddleware";
+import {PhotoDeleteMiddleware} from "./middleware/PhotoDeleteMiddleware";
+import {AlbumDeleteMiddleware} from "./middleware/AlbumDeleteMiddleware";
+import {AlbumUpdateMiddleware} from "./middleware/AlbumUpdateMiddleware";
 
 /**
  * @name AppPresenter
@@ -30,8 +30,8 @@ export default class AppPresenter {
      */
     constructor() {
         this.stories = {
-            Auth: new AuthStory,
-            Photo: new PhotoStory,
+            Auth: new AuthStory(),
+            Photo: new PhotoStory()
         };
     }
 

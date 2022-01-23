@@ -1,10 +1,11 @@
-import {Doc}                          from "./Interface";
-import { IndexDescription, ObjectId } from "mongodb";
+import {Doc} from "./Interface";
+import {IndexDescription, ObjectId} from "mongodb";
 
 /**
  * @name ClientDataSet
  */
 export class ClientDataSet {
+
     /**
      * @name fieldSets
      */
@@ -19,7 +20,7 @@ export class ClientDataSet {
         return [
             {key: {owner: 1}},
             {key: {albumId: 1}},
-            {key: {title: 1}},
+            {key: {title: 1}}
         ];
     }
 
@@ -33,7 +34,7 @@ export class ClientDataSet {
             albumId: undefined,
             title: undefined,
             url: undefined,
-            thumbnailUrl: undefined,
+            thumbnailUrl: undefined
         };
     }
 

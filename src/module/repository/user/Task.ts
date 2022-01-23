@@ -160,20 +160,20 @@ export default class UserTask extends DBStory {
                     properties: {
                         login: {
                             bsonType: "string",
-                            description: "must be a string and is required",
+                            description: "must be a string and is required"
                         },
                         email: {
                             bsonType: "string",
-                            description: "must be a string and is required",
+                            description: "must be a string and is required"
                         },
                         password: {
                             bsonType: "string",
-                            description: "must be a string and is required",
+                            description: "must be a string and is required"
                         },
                         registerDate: {
                             bsonType: "string",
-                            description: "must be a timestamp and is required",
-                        },
+                            description: "must be a timestamp and is required"
+                        }
                     },
                     required: ["login", "email", "password", "registerDate"]
                 }

@@ -1,10 +1,11 @@
-import {Doc}                                              from "./Interface";
-import { IndexDescription, IndexSpecification, ObjectId } from "mongodb";
+import {Doc} from "./Interface";
+import {IndexDescription, IndexSpecification, ObjectId} from "mongodb";
 
 /**
  * @name ClientDataSet
  */
 export class ClientDataSet {
+
     /**
      * @name fieldSets
      */
@@ -18,7 +19,7 @@ export class ClientDataSet {
     public indexes(): IndexDescription[] {
         return [
             {key: {title: 1}},
-            {key: {owner: 1}},
+            {key: {owner: 1}}
         ];
     }
 
@@ -29,7 +30,7 @@ export class ClientDataSet {
         return {
             _id: new ObjectId().toHexString(),
             title: undefined,
-            owner: undefined,
+            owner: undefined
         };
     }
 

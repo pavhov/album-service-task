@@ -1,7 +1,7 @@
-import Express                 from "express";
-import ajv                     from "../../../../../../lib/utils/ajv/lib";
-import { AnyValidateFunction } from "ajv/lib/types";
-import { Auth }                from "../../../../../story/auth/Iinterface";
+import Express from "express";
+import ajv from "../../../../../../lib/utils/ajv/lib";
+import {AnyValidateFunction} from "ajv/lib/types";
+import {Auth} from "../../../../../story/auth/Iinterface";
 
 /**
  * @name LoginAccessor
@@ -20,24 +20,26 @@ export class LoginAccessor {
             type: "object",
             properties: {
                 login: {
-                    type: "string",
+                    type: "string"
                 },
                 email: {
                     type: "string",
-                    format: "email",
+                    format: "email"
                 },
                 password: {
-                    type: "string",
-                },
+                    type: "string"
+                }
             },
             required: ["password"],
-            oneOf : [
+            oneOf: [
                 {required: ["login"]},
-                {required: ["email"]},
+                {required: ["email"]}
             ],
             additionalProperties: false
-        }, 'loginRequestSchema');
+        }, "loginRequestSchema");
     }
+
+
     /**
      * @name Instance
      * @constructor
@@ -58,13 +60,13 @@ export class LoginAccessor {
      * @protected
      */
     protected async before(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction): Promise<any> {
-        const validate: AnyValidateFunction<Auth.Request.Login> = ajv.getSchema('loginRequestSchema');
+        const validate: AnyValidateFunction<Auth.Request.Login> = ajv.getSchema("loginRequestSchema");
         try {
             const body = await validate(req.body);
             req.context = {body};
             await next();
-        } catch (e) {
-            await next(e);
+        } catch (err) {
+            await next(err);
         }
     }
 }

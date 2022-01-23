@@ -1,12 +1,11 @@
 {
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ESNext",
+    "module": "commonjs",
+    "target": "es2021",
     "lib": [
-      "ESNext"
-    ],
-    "types": [
-      "node"
+      "es2021"
     ],
     "moduleResolution": "Node",
     "sourceRoot": "./src",
@@ -16,7 +15,8 @@
     "esModuleInterop": true,
     "downlevelIteration": true,
     "inlineSourceMap": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strict": false
   },
   "files": [
     "src/Main.ts"

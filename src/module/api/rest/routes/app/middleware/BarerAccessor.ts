@@ -1,10 +1,11 @@
-import Express        from "express";
-import { AuthStory }  from "../../../../../story/auth/Story";
+import Express from "express";
+import {AuthStory} from "../../../../../story/auth/Story";
 
 /**
  * @name BarerAccessor
  */
 export class BarerAccessor {
+
     /**
      * @name stories
      * @private
@@ -24,9 +25,11 @@ export class BarerAccessor {
      */
     constructor() {
         this.stories = {
-            Auth: new AuthStory,
+            Auth: new AuthStory()
         };
     }
+
+
     /**
      * @name Instance
      * @constructor
@@ -48,11 +51,11 @@ export class BarerAccessor {
      */
     protected async before(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction): Promise<any> {
         try {
-            const authorization = req.header('authorization');
+            const authorization = req.header("authorization");
             req.context = {body: await this.stories.Auth.bearer({authorization: authorization.split(" ")[1]})};
             await next();
-        } catch (e) {
-            await next(e);
+        } catch (err) {
+            await next(err);
         }
     }
 }

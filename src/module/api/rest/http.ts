@@ -1,8 +1,8 @@
 import Express from "express";
 
-import CModule     from "./../../../lib/abstract/CModule";
+import CModule from "./../../../lib/abstract/CModule";
 import {ModuleInt} from "../../../lib/decorators/Module";
-import Params      from "./../../../lib/utils/config/Params";
+import Params from "./../../../lib/utils/config/Params";
 import {info} from "../../../lib/utils/logger/lib";
 import {ExpressApi} from "../../../lib/decorators/Express";
 

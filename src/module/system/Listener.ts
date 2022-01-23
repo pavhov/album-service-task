@@ -1,4 +1,4 @@
-import CModule     from "./../../lib/abstract/CModule";
+import CModule from "./../../lib/abstract/CModule";
 import {ModuleInt} from "../../lib/decorators/Module";
 
 /**

@@ -1,7 +1,7 @@
-import Express                 from "express";
-import ajv                     from "../../../../../../lib/utils/ajv/lib";
-import { AnyValidateFunction } from "ajv/lib/types";
-import { Auth }                from "../../../../../story/auth/Iinterface";
+import Express from "express";
+import ajv from "../../../../../../lib/utils/ajv/lib";
+import {AnyValidateFunction} from "ajv/lib/types";
+import {Auth} from "../../../../../story/auth/Iinterface";
 
 /**
  * @name LoginAccessor
@@ -26,23 +26,25 @@ export class RegisterAccessor {
             type: "object",
             properties: {
                 login: {
-                    type: "string",
+                    type: "string"
                 },
                 email: {
-                    type: "string",
+                    type: "string"
                 },
                 password: {
-                    type: "string",
-                },
+                    type: "string"
+                }
             },
             required: [
                 "login",
                 "email",
-                "password",
+                "password"
             ],
             additionalProperties: false
-        }, 'registerRequestSchema');
+        }, "registerRequestSchema");
     }
+
+
     /**
      * @name Instance
      * @constructor
@@ -63,13 +65,13 @@ export class RegisterAccessor {
      * @protected
      */
     protected async before(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction): Promise<any> {
-        const validate: AnyValidateFunction<Auth.Request.Register> = ajv.getSchema('registerRequestSchema');
+        const validate: AnyValidateFunction<Auth.Request.Register> = ajv.getSchema("registerRequestSchema");
         try {
             const body = await validate(req.body);
             req.context = {body};
             await next();
-        } catch (e) {
-            await next(e);
+        } catch (err) {
+            await next(err);
         }
     }
 }

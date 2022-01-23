@@ -1,5 +1,5 @@
-import DBStory        from "../../../../lib/abstract/DBStory";
-import {ModuleInt}    from "../../../../lib/decorators/Module";
+import DBStory from "../../../../lib/abstract/DBStory";
+import {ModuleInt} from "../../../../lib/decorators/Module";
 import MonoDataSource from "../mongo/DataSource";
 import CModule, {staticModules} from "./../../../../lib/abstract/CModule";
 
@@ -25,7 +25,7 @@ export default class DataSource extends CModule {
         super();
 
         this._dataSource = {
-            mongo: new MonoDataSource(),
+            mongo: new MonoDataSource()
         };
         this.staticModules = staticModules;
 
