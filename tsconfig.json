@@ -6,8 +6,7 @@
       "ESNext"
     ],
     "types": [
-      "node",
-      "jest"
+      "node"
     ],
     "moduleResolution": "Node",
     "sourceRoot": "./src",

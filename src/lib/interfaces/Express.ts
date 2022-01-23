@@ -1,9 +1,9 @@
-import {Middleware} from "express";
+import {Handler} from "express";
 
 export interface MiddlewareCases {
-  handler: Middleware;
-  before?: Middleware[];
-  after?: Middleware[];
-  success?: Middleware[];
-  fail?: Middleware[];
+  handler: Handler;
+  before?: Handler[];
+  after?: Handler[];
+  success?: Handler[];
+  fail?: Handler[];
 }

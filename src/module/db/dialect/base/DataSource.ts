@@ -1,5 +1,5 @@
-import DBStory from "../../../../lib/abstract/DBStory";
-import {ModuleInt} from "../../../../lib/decorators/CModule";
+import DBStory        from "../../../../lib/abstract/DBStory";
+import {ModuleInt}    from "../../../../lib/decorators/Module";
 import MonoDataSource from "../mongo/DataSource";
 import CModule, {staticModules} from "./../../../../lib/abstract/CModule";
 
@@ -83,7 +83,10 @@ export default class DataSource extends CModule {
      * @name destroy
      * @protected
      */
-    protected destroy(): Promise<void> {
+    protected async destroy(): Promise<void> {
+        for (const name in this.dataSource) {
+            await this.dataSource[name].destroy();
+        }
         return Promise.resolve(undefined);
     }
 }

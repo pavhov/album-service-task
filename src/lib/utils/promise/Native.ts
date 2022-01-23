@@ -5,7 +5,7 @@ const timeout = promisify(setTimeout);
 
 export class CPromise<T> extends Bluebird<T> {
     static async retry<T>(call: () => Promise<T>, attempt: number): Promise<T> {
-        let result;
+        let result: T;
         do {
             --attempt;
             try {

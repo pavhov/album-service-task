@@ -1,10 +1,15 @@
 import {
+    BulkWriteOptions,
     Collection,
     Db,
-    MongoClient,
-    OptionalId,
+    DeleteOptions,
     Filter,
-    FindOptions, UpdateFilter, UpdateOptions, OptionalUnlessRequiredId, InsertOneOptions, BulkWriteOptions, DeleteOptions,
+    FindOptions,
+    InsertOneOptions,
+    MongoClient,
+    OptionalUnlessRequiredId,
+    UpdateFilter,
+    UpdateOptions
 } from "mongodb";
 
 import {DBModule} from "../../../lib/decorators/DBModul";

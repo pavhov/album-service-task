@@ -1,5 +1,5 @@
-import CModule from "./../../lib/abstract/CModule";
-import {ModuleInt} from "../../lib/decorators/CModule";
+import CModule     from "./../../lib/abstract/CModule";
+import {ModuleInt} from "../../lib/decorators/Module";
 
 /**
  * @name Listener

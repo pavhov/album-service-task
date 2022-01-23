@@ -1,8 +1,8 @@
 import Express from 'express';
-import listEndpoints, {Endpoint} from 'express-list-endpoints';
+import listEndpoints from 'express-list-endpoints';
 
 import { Error404Handler, ExpressionHandler } from "../../module/api/rest/middleware/ExpressionHandler";
-import {MiddlewareCases}                      from "../interfaces/Koa";
+import {MiddlewareCases}                      from "../interfaces/Express";
 import {debug, error} from "../utils/logger/lib";
 
 import Params from "./../../lib/utils/config/Params";
@@ -15,8 +15,7 @@ const express:
         app: Express.Application;
         router: { [key: string]: Express.Router };
     };
-}
-    | any = {[key]: {}};
+} | any = {[key]: {}};
 
 export function ExpressApi<T extends new (...args: any[]) => any>(constructor: T) {
     express[key].app = Express();

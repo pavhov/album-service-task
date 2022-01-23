@@ -1,28 +1,18 @@
-import Express         from "express";
-import ajv             from "../../../../../../lib/utils/ajv/lib";
+import Express                 from "express";
+import ajv                     from "../../../../../../lib/utils/ajv/lib";
+import { AnyValidateFunction } from "ajv/lib/types";
+import { Auth }                from "../../../../../story/auth/Iinterface";
 
 /**
  * @name LoginAccessor
  */
-export class RegisterAccessor {
-
-    /**
-     * @name _options
-     * @private
-     */
-    private readonly _options: any;
+export class LoginAccessor {
 
     /**
      * @name _instance
      * @private
      */
-    private static _instance: RegisterAccessor;
-
-    /**
-     * @name _requestSchema
-     * @private
-     */
-
+    private static _instance: LoginAccessor;
 
     constructor() {
         ajv.addSchema({
@@ -34,29 +24,30 @@ export class RegisterAccessor {
                 },
                 email: {
                     type: "string",
+                    format: "email",
                 },
                 password: {
                     type: "string",
                 },
             },
-            required: [
-                "login",
-                "email",
-                "password",
+            required: ["password"],
+            oneOf : [
+                {required: ["login"]},
+                {required: ["email"]},
             ],
             additionalProperties: false
-        }, 'registerRequestSchema');
+        }, 'loginRequestSchema');
     }
     /**
      * @name Instance
      * @constructor
      */
-    static Instance(): RegisterAccessor {
-        if (!RegisterAccessor._instance) {
-            RegisterAccessor._instance = new RegisterAccessor();
+    static Instance(): LoginAccessor {
+        if (!LoginAccessor._instance) {
+            LoginAccessor._instance = new LoginAccessor();
         }
 
-        return RegisterAccessor._instance;
+        return LoginAccessor._instance;
     }
 
     /**
@@ -67,7 +58,7 @@ export class RegisterAccessor {
      * @protected
      */
     protected async before(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction): Promise<any> {
-        const validate = ajv.getSchema('registerRequestSchema');
+        const validate: AnyValidateFunction<Auth.Request.Login> = ajv.getSchema('loginRequestSchema');
         try {
             const body = await validate(req.body);
             req.context = {body};
@@ -75,16 +66,5 @@ export class RegisterAccessor {
         } catch (e) {
             await next(e);
         }
-    }
-
-    /**
-     * @name after
-     * @param req
-     * @param res
-     * @param next
-     * @protected
-     */
-    protected async after(req: Express.Request, res: Express.Response, next: Express.NextFunction): Promise<any> {
-        next();
     }
 }

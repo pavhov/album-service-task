@@ -6,11 +6,14 @@ const ajv = new Ajv({
     allErrors: true,
     strictTypes: true,
     strictTuples: true,
+    coerceTypes: true,
     removeAdditional: true,
     strict: false,
     logger,
 });
 
 addFormats(ajv)
+
+ajv.addFormat("coma-seperated", "^[0-9a-zA-Z]+(,[0-9a-zA-Z]+)*$");
 
 export default ajv;

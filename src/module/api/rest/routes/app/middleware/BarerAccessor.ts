@@ -5,7 +5,6 @@ import { AuthStory }  from "../../../../../story/auth/Story";
  * @name BarerAccessor
  */
 export class BarerAccessor {
-
     /**
      * @name stories
      * @private
@@ -21,10 +20,8 @@ export class BarerAccessor {
     private static _instance: BarerAccessor;
 
     /**
-     * @name _requestSchema
-     * @private
+     * @name BarerAccessor
      */
-
     constructor() {
         this.stories = {
             Auth: new AuthStory,
@@ -57,16 +54,5 @@ export class BarerAccessor {
         } catch (e) {
             await next(e);
         }
-    }
-
-    /**
-     * @name after
-     * @param req
-     * @param res
-     * @param next
-     * @protected
-     */
-    protected async after(req: Express.Request, res: Express.Response, next: Express.NextFunction): Promise<any> {
-        next();
     }
 }

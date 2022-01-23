@@ -1,12 +1,17 @@
 import {Doc}                                              from "./Interface";
-import { IndexDescription, IndexSpecification, ObjectId } from "mongodb";
-import { numParts }                                       from "npm-check-updates/build/src/version-util";
+import { IndexDescription, ObjectId } from "mongodb";
 
 export class ClientDataSet {
+    /**
+     * @name fieldSets
+     */
     public fieldSets(): Array<keyof Doc> {
         return ["_id", "login", "email", "password", "registerDate"];
     }
 
+    /**
+     * @name indexes
+     */
     public indexes(): IndexDescription[] {
         return [
             {key: {login: 1}, unique: true},
@@ -14,6 +19,9 @@ export class ClientDataSet {
         ];
     }
 
+    /**
+     * @defaults
+     */
     public defaults(): Doc {
         return {
             _id: new ObjectId().toHexString(),
@@ -24,6 +32,11 @@ export class ClientDataSet {
         };
     }
 
+    /**
+     * @name dataSet
+     *
+     * @param data
+     */
     public dataSet(data: Doc) {
         const [result, fieldSets] = [this.defaults(), this.fieldSets()];
         for (const field of fieldSets) {
@@ -34,6 +47,11 @@ export class ClientDataSet {
         return result;
     }
 
+    /**
+     * @name dataSets
+     *
+     * @param data
+     */
     public dataSets(data: Doc[]) {
         return data.map((value) => this.dataSet(value));
     }

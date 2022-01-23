@@ -1,11 +1,20 @@
 import {Doc}                          from "./Interface";
 import { IndexDescription, ObjectId } from "mongodb";
 
+/**
+ * @name ClientDataSet
+ */
 export class ClientDataSet {
+    /**
+     * @name fieldSets
+     */
     public fieldSets(): Array<keyof Doc> {
         return ["_id", "owner", "albumId", "title", "url", "thumbnailUrl"];
     }
 
+    /**
+     * @name indexes
+     */
     public indexes(): IndexDescription[] {
         return [
             {key: {owner: 1}},
@@ -14,6 +23,9 @@ export class ClientDataSet {
         ];
     }
 
+    /**
+     * @name defaults
+     */
     public defaults(): Doc {
         return {
             _id: new ObjectId().toHexString(),
@@ -25,6 +37,11 @@ export class ClientDataSet {
         };
     }
 
+    /**
+     * @name dataSet
+     *
+     * @param data
+     */
     public dataSet(data: Doc) {
         const [result, fieldSets] = [this.defaults(), this.fieldSets()];
         for (const field of fieldSets) {
@@ -35,6 +52,11 @@ export class ClientDataSet {
         return result;
     }
 
+    /**
+     * @name dataSets
+     *
+     * @param data
+     */
     public dataSets(data: Doc[]) {
         return data.map((value) => this.dataSet(value));
     }

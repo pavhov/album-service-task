@@ -1,10 +1,14 @@
 import { Delete, Get, Patch, Post, Presenter, Put, Use } from "../../../../../lib/decorators/Express";
 import Express                                           from "express";
-import { LoginAccessor }                                 from "./accessor/LoginAccessor";
+import { LoginAccessor }                                 from "./middleware/LoginAccessor";
 import { AuthStory }                                     from "../../../../story/auth/Story";
-import { RegisterAccessor }                              from "./accessor/RegisterAccessor";
+import { RegisterAccessor }                              from "./middleware/RegisterAccessor";
 import { PhotoStory }                                    from "../../../../story/photo/Story";
-import { BarerAccessor }                                 from "./accessor/BarerAccessor";
+import { BarerAccessor }                                 from "./middleware/BarerAccessor";
+import { PaginationMiddleware }                          from "./middleware/PaginationMiddleware";
+import { PhotoDeleteMiddleware }                         from "./middleware/PhotoDeleteMiddleware";
+import { AlbumDeleteMiddleware }                         from "./middleware/AlbumDeleteMiddleware";
+import { AlbumUpdateMiddleware }                         from "./middleware/AlbumUpdateMiddleware";
 
 /**
  * @name AppPresenter
@@ -85,14 +89,14 @@ export default class AppPresenter {
      * @param res
      * @param next
      */
+    @Use(PaginationMiddleware)
     @Get()
-    async "/get-photos"(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+    async "/get-photos"(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction) {
         try {
-            res.json({});
+            res.json(await this.stories.Photo.get(req.context.query));
         } catch (err) {
             next(err);
         }
-
     }
 
     /**
@@ -101,14 +105,15 @@ export default class AppPresenter {
      * @param res
      * @param next
      */
+    @Use(BarerAccessor)
+    @Use(PhotoDeleteMiddleware)
     @Delete()
-    async "/delete-photo"(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+    async "/delete-photo"(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction) {
         try {
-            res.json({});
+            res.json(await this.stories.Photo.delete(req.context.query));
         } catch (err) {
             next(err);
         }
-
     }
 
     /**
@@ -117,14 +122,15 @@ export default class AppPresenter {
      * @param res
      * @param next
      */
+    @Use(BarerAccessor)
+    @Use(AlbumDeleteMiddleware)
     @Delete()
-    async "/delete-album"(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+    async "/delete-album"(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction) {
         try {
-            res.json({});
+            res.json(await this.stories.Photo.deleteAlbum(req.context.query));
         } catch (err) {
             next(err);
         }
-
     }
 
     /**
@@ -134,9 +140,10 @@ export default class AppPresenter {
      * @param next
      */
     @Put()
-    async "/change-album-title"(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+    @Use(AlbumUpdateMiddleware)
+    async "/change-album-title"(req: Express.Request & {context}, res: Express.Response, next: Express.NextFunction) {
         try {
-            res.json({});
+            res.json(await this.stories.Photo.updateAlbum(req.context.body));
         } catch (err) {
             next(err);
         }
